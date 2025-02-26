@@ -2,10 +2,12 @@ import java.util.ArrayList;
 
 public class Biblioteca {
     private ArrayList<Libro> libros;
+    private ArrayList<Prestamo> prestamos;
 
-    // Constructor: inicializa la lista de libros como vacía
+    // Constructor
     public Biblioteca() {
         this.libros = new ArrayList<>();
+        this.prestamos = new ArrayList<>();
     }
 
     // Método para agregar un libro a la biblioteca
@@ -13,39 +15,42 @@ public class Biblioteca {
         libros.add(libro);
     }
 
-    // Método que regresa todos los libros en la biblioteca como una cadena
-    public void mostrarLibros() {
-        if (libros.isEmpty()) {
-            System.out.println("No hay libros en la biblioteca.");
-        } else {
-            for (Libro libro : libros) {
-                System.out.println(libro.getInformacion());
-            }
-        }
+    // Método para agregar un préstamo a la biblioteca
+    public void agregarPrestamo(Prestamo prestamo) {
+        prestamos.add(prestamo);
+        prestamo.getLibro().setPrestado(true);  // Marcamos el libro como prestado
     }
 
-    // Método para buscar un libro por su título
-    public void buscarLibroPorTitulo(String titulo) {
-        boolean encontrado = false;
+    // Método para devolver un libro
+    public void devolverLibro(Prestamo prestamo) {
+        prestamo.devolverLibro();
+        prestamo.getLibro().setPrestado(false);  // Marcamos el libro como no prestado
+    }
+
+    // Método para obtener la lista de libros prestados
+    public ArrayList<Libro> obtenerLibrosPrestados() {
+        ArrayList<Libro> librosPrestados = new ArrayList<>();
+        for (Prestamo prestamo : prestamos) {
+            if (!prestamo.isDevuelto()) {
+                librosPrestados.add(prestamo.getLibro());
+            }
+        }
+        return librosPrestados;
+    }
+
+    // Método para obtener la lista de libros no prestados
+    public ArrayList<Libro> obtenerLibrosNoPrestados() {
+        ArrayList<Libro> librosNoPrestados = new ArrayList<>();
         for (Libro libro : libros) {
-            if (libro.getTitulo().equalsIgnoreCase(titulo)) {
-                System.out.println("Libro encontrado: " + libro.getInformacion());
-                System.out.println("¿Es antiguo? " + (libro.esAntiguo() ? "Sí" : "No"));
-                encontrado = true;
-                break;
+            if (!libro.isPrestado()) {
+                librosNoPrestados.add(libro);
             }
         }
-        if (!encontrado) {
-            System.out.println("El libro con título \"" + titulo + "\" no se encuentra en la biblioteca.");
-        }
+        return librosNoPrestados;
     }
 
-    // Método para obtener la lista de libros (utilizado en el Main para el método esAntiguo)
-    public ArrayList<Libro> getListaLibros() {
-        return libros;
-    }
-
-    public String toString() {
-        return "Biblioteca con " + libros.size() + " libros.";
+    // Método para obtener la lista de préstamos
+    public ArrayList<Prestamo> obtenerPrestamos() {
+        return prestamos;
     }
 }

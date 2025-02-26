@@ -1,15 +1,17 @@
 public class Libro {
     private String titulo;
-    private String autor;
+    private Autor autor;  // Ahora almacena un objeto Autor
     private int añoPublicacion;
     private String isbn;
+    private boolean prestado;
 
-    // Constructor
-    public Libro(String titulo, String autor, int añoPublicacion, String isbn) {
+    // Constructor corregido para aceptar un objeto Autor
+    public Libro(String titulo, Autor autor, int añoPublicacion, String isbn) {
         this.titulo = titulo;
-        this.autor = autor;
+        this.autor = autor;  // Guardamos el objeto Autor, no solo su nombre
         this.añoPublicacion = añoPublicacion;
         this.isbn = isbn;
+        this.prestado = false;
     }
 
     // Getters y setters
@@ -17,44 +19,29 @@ public class Libro {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
     }
 
     public int getAñoPublicacion() {
         return añoPublicacion;
     }
 
-    public void setAñoPublicacion(int añoPublicacion) {
-        this.añoPublicacion = añoPublicacion;
-    }
-
     public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public boolean isPrestado() {
+        return prestado;
     }
 
-    // Métodos
+    public void setPrestado(boolean prestado) {
+        this.prestado = prestado;
+    }
+
     public String getInformacion() {
-        return "Título: " + titulo + ", Autor: " + autor + ", Año: " + añoPublicacion + ", ISBN: " + isbn;
-    }
-
-    public boolean esAntiguo() {
-        return (2025 - añoPublicacion) > 20;
-    }
-
-    public String toString() {
-        return getInformacion();
+        return "Título: " + titulo + ", Autor: " + autor.getNombre() + 
+               ", Año: " + añoPublicacion + ", ISBN: " + isbn + 
+               ", Prestado: " + (prestado ? "Sí" : "No");
     }
 }

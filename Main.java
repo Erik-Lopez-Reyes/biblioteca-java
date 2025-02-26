@@ -1,31 +1,49 @@
 public class Main {
     public static void main(String[] args) {
-        // Crear libros
-        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", 1967, "1234567890");
-        Libro libro2 = new Libro("Don Quijote de la Mancha", "Miguel de Cervantes", 1605, "0987654321");
-        Libro libro3 = new Libro("El señor de los anillos", "J.R.R. Tolkien", 1954, "1122334455");
+        // Crear autores
+        Autor autor1 = new Autor(1, "Gabriel García Márquez", "gabriel@correo.com");
+        Autor autor2 = new Autor(2, "Miguel de Cervantes", "cervantes@correo.com");
+
+        // Crear libros con objeto Autor
+        Libro libro1 = new Libro("Cien años de soledad", autor1, 1967, "1234567890");
+        Libro libro2 = new Libro("Don Quijote de la Mancha", autor2, 1605, "0987654321");
+
+        // Crear lectores
+        Lector lector1 = new Lector(1, "Juan Pérez");
+        Lector lector2 = new Lector(2, "María López");
 
         // Crear biblioteca y agregar libros
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.agregarLibro(libro1);
         biblioteca.agregarLibro(libro2);
-        biblioteca.agregarLibro(libro3);
 
-        // Mostrar todos los libros
-        System.out.println("Listado de libros en la biblioteca:");
-        biblioteca.mostrarLibros();
+        // Crear préstamos
+        Prestamo prestamo1 = new Prestamo(libro1, lector1);
+        Prestamo prestamo2 = new Prestamo(libro2, lector2);
 
-        // Buscar un libro por título
-        System.out.println("\nBuscando el libro \"Don Quijote de la Mancha\":");
-        biblioteca.buscarLibroPorTitulo("Don Quijote de la Mancha");
+        // Agregar préstamos a la biblioteca
+        biblioteca.agregarPrestamo(prestamo1);
+        biblioteca.agregarPrestamo(prestamo2);
 
-        System.out.println("\nBuscando un libro que no existe:");
-        biblioteca.buscarLibroPorTitulo("El principito");
+        // Mostrar libros prestados
+        System.out.println("Libros prestados:");
+        for (Libro libro : biblioteca.obtenerLibrosPrestados()) {
+            System.out.println(libro.getTitulo());
+        }
 
-        // Mostrar si los libros son antiguos
-        System.out.println("\n¿Los libros son antiguos?");
-        for (Libro libro : biblioteca.getListaLibros()) {
-            System.out.println("El libro \"" + libro.getTitulo() + "\" es antiguo: " + libro.esAntiguo());
+        // Mostrar libros no prestados
+        System.out.println("\nLibros no prestados:");
+        for (Libro libro : biblioteca.obtenerLibrosNoPrestados()) {
+            System.out.println(libro.getTitulo());
+        }
+
+        // Devolver un libro
+        biblioteca.devolverLibro(prestamo1);
+
+        // Mostrar libros prestados después de devolver uno
+        System.out.println("\nLibros prestados después de devolver uno:");
+        for (Libro libro : biblioteca.obtenerLibrosPrestados()) {
+            System.out.println(libro.getTitulo());
         }
     }
 }
