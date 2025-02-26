@@ -1,20 +1,18 @@
 public class Libro {
     private String titulo;
-    private Autor autor;  // Ahora almacena un objeto Autor
+    private Autor autor;
     private int añoPublicacion;
     private String isbn;
     private boolean prestado;
 
-    // Constructor corregido para aceptar un objeto Autor
     public Libro(String titulo, Autor autor, int añoPublicacion, String isbn) {
         this.titulo = titulo;
-        this.autor = autor;  // Guardamos el objeto Autor, no solo su nombre
+        this.autor = autor;
         this.añoPublicacion = añoPublicacion;
         this.isbn = isbn;
         this.prestado = false;
     }
 
-    // Getters y setters
     public String getTitulo() {
         return titulo;
     }

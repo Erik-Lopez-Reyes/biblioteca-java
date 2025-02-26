@@ -3,14 +3,12 @@ public class Autor {
     private String nombre;
     private String correo;
 
-    // Constructor
     public Autor(int id, String nombre, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
     }
 
-    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -35,7 +33,6 @@ public class Autor {
         this.correo = correo;
     }
 
-    // Método para obtener la información del autor
     public String getInformacion() {
         return "ID: " + id + ", Nombre: " + nombre + ", Correo: " + correo;
     }
