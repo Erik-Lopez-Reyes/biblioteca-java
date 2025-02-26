@@ -54,7 +54,6 @@ public class Libro {
         return (2025 - añoPublicacion) > 20;
     }
 
-    @Override
     public String toString() {
         return getInformacion();
     }

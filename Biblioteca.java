@@ -45,7 +45,6 @@ public class Biblioteca {
         return libros;
     }
 
-    @Override
     public String toString() {
         return "Biblioteca con " + libros.size() + " libros.";
     }
